@@ -1,16 +1,15 @@
 import { app } from "./app";
+import { dbConnect } from "./utils/dbConnect";
 
 const port: string | number = process.env.PORT || 5000;
-
-/* Start Server Function to start the server and Database*/
-const startServer = async () => {
+const startServer = async (): Promise<void> => {
   try {
-    /* listen server */
     app.listen(port, () => {
-      console.log(`Server is listening on port ${port}`);
+      console.log(`Server is running on port ${port}`);
+      dbConnect(); // temp db connection
     });
   } catch (error) {
-    console.log("Server Connection Error: ", error);
+    console.log(`Server error: ${error}`);
   }
 };
 startServer();
